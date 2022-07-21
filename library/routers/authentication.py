@@ -8,7 +8,7 @@ from .. hashing import Hash
 from .. import models, JWT_token
 
 
-from blog import database
+from library import database
 
 
 router = APIRouter(

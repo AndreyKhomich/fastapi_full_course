@@ -19,16 +19,16 @@ def create(request: schemas.Book, db: Session):
 def destroy(id: int, db: Session):
     book = db.query(models.Book).filter(models.Book.id == id)
     if not book.first():
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Blog with id {id} does not exist")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Book with id {id} does not exist")
     book.delete(synchronize_session=False)
     db.commit()
-    return "The  blog was deleted"
+    return "The  library was deleted"
 
 
 def update(id: int, request: schemas.Book, db: Session):
     book = db.query(models.Book).filter(models.Book.id == id)
     if not book.first():
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Blog with id {id} does not exist")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Book with id {id} does not exist")
     book.update(request.dict())
     db.commit()
     return 'Updated'
@@ -37,5 +37,5 @@ def update(id: int, request: schemas.Book, db: Session):
 def get_single(id: int, db: Session):
     book = db.query(models.Book).filter(models.Book.id == id).first()
     if not book:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Blog with id {id} is not available")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Book with id {id} is not available")
     return book
