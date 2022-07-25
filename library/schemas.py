@@ -1,13 +1,19 @@
-from typing import List, Union, Optional
-from pydantic import BaseModel
+from typing import List, Optional
+from pydantic import BaseModel, Field
 
 
 class BaseBook(BaseModel):
     title: str
     author: str
+    user_id: int
+
+    class Config:
+        orm_mode = True
 
 
 class Book(BaseBook):
+    title: str
+    author: str
 
     class Config:
         orm_mode = True
@@ -31,7 +37,7 @@ class ShowUser(BaseModel):
 class ShowBook(BaseModel):
     title: str
     author: str
-    creator: ShowUser
+    reader: ShowUser
 
     class Config:
         orm_mode = True
