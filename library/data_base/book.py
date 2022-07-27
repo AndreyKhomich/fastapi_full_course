@@ -9,14 +9,6 @@ def get_all(db: Session):
     return books
 
 
-def create(request: schemas.Book, db: Session):
-    new_book = models.Book(title=request.title, author=request.author, user_id=1)
-    db.add(new_book)
-    db.commit()
-    db.refresh(new_book)
-    return new_book
-
-
 def delete(book_id: int, db: Session):
     book = db.query(models.Book).filter(models.Book.id == book_id)
     if not book.first():

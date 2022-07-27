@@ -5,15 +5,18 @@ from pydantic import BaseModel, Field
 class BaseBook(BaseModel):
     title: str
     author: str
-    user_id: int
 
     class Config:
         orm_mode = True
 
 
+class BookCreate(BaseBook):
+    pass
+
+
 class Book(BaseBook):
-    title: str
-    author: str
+    id: int
+    owner_id: str
 
     class Config:
         orm_mode = True
