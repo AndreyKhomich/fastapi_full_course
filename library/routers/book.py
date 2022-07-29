@@ -18,9 +18,9 @@ def get_books(db: Session = Depends(get_db), get_current_user: schemas.User = De
     return book.get_all(db)
 
 
-@router.post("/", status_code=status.HTTP_201_CREATED)
-def create(request: schemas.Book,  db: Session = Depends(get_db),  get_current_user: schemas.User = Depends(oath2.get_current_user)):
-    return book.create(request, db)
+@router.post("/{id}", status_code=status.HTTP_201_CREATED, response_model=schemas.ShowBook)
+def create(user_id: int, request: schemas.BookCreate,  db: Session = Depends(get_db),  get_current_user: schemas.User = Depends(oath2.get_current_user)):
+    return book.create_user_book(request, db, user_id)
 
 
 @router.delete("/{book_id}", status_code=status.HTTP_204_NO_CONTENT)
